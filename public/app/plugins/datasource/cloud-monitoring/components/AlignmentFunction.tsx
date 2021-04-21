@@ -18,7 +18,7 @@ export const AlignmentFunction: FC<Props> = ({ query, templateVariableOptions, o
   );
 
   return (
-    <InlineField label="Alignment function" className="width-16">
+    <InlineField label="Function" className="width-16">
       <Select
         onChange={({ value }) => onChange({ ...query, perSeriesAligner: value! })}
         value={[...alignOptions, ...templateVariableOptions].find((s) => s.value === perSeriesAligner)}

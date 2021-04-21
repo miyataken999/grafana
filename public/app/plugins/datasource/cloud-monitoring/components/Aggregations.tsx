@@ -20,7 +20,7 @@ export const Aggregations: FC<Props> = (props) => {
   const selected = useSelectedFromOptions(aggOptions, props);
 
   return (
-    <InlineFields label="Group by function" data-testid="aggregations">
+    <InlineFields label="Function" data-testid="aggregations">
       <Select
         onChange={({ value }) => props.onChange(value!)}
         value={selected}

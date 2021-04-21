@@ -53,7 +53,7 @@ export class QueryEditor extends PureComponent<Props> {
 
     return (
       <>
-        <InlineFields label="Query Type" transparent labelWidth={LABEL_WIDTH}>
+        <InlineFields label="Query type" transparent labelWidth={LABEL_WIDTH}>
           <Select
             width={SELECT_WIDTH}
             value={queryType}

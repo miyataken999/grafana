@@ -18,11 +18,7 @@ export interface Props {
 const operators = ['=', '!=', '=~', '!=~'];
 
 const FilterButton = React.forwardRef<HTMLButtonElement, CustomControlProps<string>>(({ value, ...rest }, ref) => {
-  return (
-    <Button ref={ref} {...rest} variant="secondary" icon="plus">
-      Add filter
-    </Button>
-  );
+  return <Button ref={ref} {...rest} variant="secondary" icon="plus"></Button>;
 });
 FilterButton.displayName = 'FilterButton';
 
@@ -52,6 +48,20 @@ export const LabelFilter: FunctionComponent<Props> = ({
     // return strArr.filter((_, i) => i !== strArr.length - 1);
     return strArr.slice(0, strArr.length - 1);
   }, []);
+
+  const AddFilter = () => {
+    return (
+      <Select
+        allowCustomValue
+        options={[variableOptionGroup, ...labelsToGroupedOptions(Object.keys(labels))]}
+        onChange={({ value: key = '' }) =>
+          onChange(filtersToStringArray([...filters, { key, operator: '=', condition: 'AND', value: '' } as Filter]))
+        }
+        menuPlacement="bottom"
+        renderControl={FilterButton}
+      />
+    );
+  };
 
   return (
     <InlineFields
@@ -108,20 +118,13 @@ export const LabelFilter: FunctionComponent<Props> = ({
               aria-label="Remove"
               onClick={() => onChange(filtersToStringArray(filters.filter((_, i) => i !== index)))}
             ></Button>
+            {index + 1 === filters.length && Object.values(filters).every(({ value }) => value) && <AddFilter />}
           </HorizontalGroup>
         ))}
-        {Object.values(filters).every(({ value }) => value) && (
-          <Select
-            allowCustomValue
-            options={[variableOptionGroup, ...labelsToGroupedOptions(Object.keys(labels))]}
-            onChange={({ value: key = '' }) =>
-              onChange(
-                filtersToStringArray([...filters, { key, operator: '=', condition: 'AND', value: '' } as Filter])
-              )
-            }
-            menuPlacement="bottom"
-            renderControl={FilterButton}
-          />
+        {!filters.length && (
+          <HorizontalGroup>
+            <AddFilter />
+          </HorizontalGroup>
         )}
       </VerticalGroup>
     </InlineFields>
