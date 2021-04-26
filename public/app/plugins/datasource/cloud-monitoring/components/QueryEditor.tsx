@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { css } from '@emotion/css';
 import { ExploreQueryFieldProps } from '@grafana/data';
 import { Button, Select } from '@grafana/ui';
-import { MetricQueryEditor, SLOQueryEditor, InlineFields } from './';
+import { MetricQueryEditor, SLOQueryEditor, Row } from './';
 import { CloudMonitoringQuery, MetricQuery, QueryType, SLOQuery, EditorMode } from '../types';
 import { LABEL_WIDTH, SELECT_WIDTH, QUERY_TYPES } from '../constants';
 import { defaultQuery } from './MetricQueryEditor';
@@ -53,7 +53,7 @@ export class QueryEditor extends PureComponent<Props> {
 
     return (
       <>
-        <InlineFields label="Query type" transparent labelWidth={LABEL_WIDTH}>
+        <Row label="Query type" labelWidth={LABEL_WIDTH}>
           <Select
             width={SELECT_WIDTH}
             value={queryType}
@@ -80,7 +80,7 @@ export class QueryEditor extends PureComponent<Props> {
               {metricQuery.editorMode === EditorMode.MQL ? 'Switch to builder' : 'Edit MQL'}
             </Button>
           )}
-        </InlineFields>
+        </Row>
 
         {queryType === QueryType.METRICS && (
           <MetricQueryEditor

@@ -1,6 +1,6 @@
 import React from 'react';
 import { SelectableValue } from '@grafana/data';
-import { Project, AliasBy, AlignmentPeriod, AlignmentPeriodLabel, InlineFields } from '..';
+import { Project, AliasBy, AlignmentPeriod, AlignmentPeriodLabel, Row } from '..';
 import { AlignmentTypes, CustomMetaData, SLOQuery } from '../../types';
 import CloudMonitoringDatasource from '../../datasource';
 import { Selector, Service, SLO } from '.';
@@ -61,7 +61,7 @@ export function SLOQueryEditor({
         onChange={onChange}
       ></Selector>
 
-      <InlineFields label="Alignment period" transparent labelWidth={LABEL_WIDTH}>
+      <Row label="Alignment period" labelWidth={LABEL_WIDTH}>
         <AlignmentPeriod
           templateVariableOptions={variableOptionGroup.options}
           query={{
@@ -72,7 +72,7 @@ export function SLOQueryEditor({
           selectWidth={SELECT_WIDTH}
         />
         <AlignmentPeriodLabel datasource={datasource} customMetaData={customMetaData} />
-      </InlineFields>
+      </Row>
 
       <AliasBy value={query.aliasBy} onChange={(aliasBy) => onChange({ ...query, aliasBy })} />
     </>

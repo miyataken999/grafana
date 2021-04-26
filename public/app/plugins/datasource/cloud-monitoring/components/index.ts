@@ -16,4 +16,4 @@ export { QueryTypeSelector } from './QueryType';
 export { VariableQueryField } from './Fields';
 export { VisualMetricQueryEditor } from './VisualMetricQueryEditor';
 export { Preprocessor } from './Preprocessor';
-export { InlineFields } from './InlineFields';
+export { Row, Field } from './InlineFields';

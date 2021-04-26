@@ -1,7 +1,7 @@
 import React from 'react';
 import { Select } from '@grafana/ui';
 import { SelectableValue } from '@grafana/data';
-import { InlineFields } from '..';
+import { Row } from '..';
 import CloudMonitoringDatasource from '../../datasource';
 import { SLOQuery } from '../../types';
 import { LABEL_WIDTH, SELECT_WIDTH, SELECTORS } from '../../constants';
@@ -15,7 +15,7 @@ export interface Props {
 
 export const Selector: React.FC<Props> = ({ query, templateVariableOptions, onChange, datasource }) => {
   return (
-    <InlineFields label="Selector" grow transparent labelWidth={LABEL_WIDTH}>
+    <Row label="Selector" labelWidth={LABEL_WIDTH}>
       <Select
         width={SELECT_WIDTH}
         allowCustomValue
@@ -29,6 +29,6 @@ export const Selector: React.FC<Props> = ({ query, templateVariableOptions, onCh
         ]}
         onChange={({ value: selectorName }) => onChange({ ...query, selectorName: selectorName ?? '' })}
       />
-    </InlineFields>
+    </Row>
   );
 };

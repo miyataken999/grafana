@@ -4,7 +4,7 @@ import { InlineField, MultiSelect } from '@grafana/ui';
 import { labelsToGroupedOptions } from '../functions';
 import { SYSTEM_LABELS, LABEL_WIDTH, INPUT_WIDTH } from '../constants';
 import { MetricDescriptor, MetricQuery } from '../types';
-import { Aggregations, InlineFields } from '.';
+import { Aggregations, Row } from '.';
 
 export interface Props {
   variableOptionGroup: SelectableValue<string>;
@@ -27,23 +27,20 @@ export const GroupBy: FunctionComponent<Props> = ({
   ]);
 
   return (
-    <InlineFields
+    <Row
       label="Group by"
-      transparent
       labelWidth={LABEL_WIDTH}
       tooltip="You can reduce the amount of data returned for a metric by combining different time series. To combine multiple time series, you can specify a grouping and a function. Grouping is done on the basis of labels. The grouping function is used to combine the time series in the group into a single time series."
     >
-      <InlineField>
-        <MultiSelect
-          width={INPUT_WIDTH}
-          placeholder="Choose label"
-          options={options}
-          value={query.groupBys ?? []}
-          onChange={(options) => {
-            onChange({ ...query, groupBys: options.map((o) => o.value!) });
-          }}
-        ></MultiSelect>
-      </InlineField>
+      <MultiSelect
+        width={INPUT_WIDTH}
+        placeholder="Choose label"
+        options={options}
+        value={query.groupBys ?? []}
+        onChange={(options) => {
+          onChange({ ...query, groupBys: options.map((o) => o.value!) });
+        }}
+      ></MultiSelect>
       <Aggregations
         metricDescriptor={metricDescriptor}
         templateVariableOptions={variableOptionGroup.options}
@@ -51,6 +48,6 @@ export const GroupBy: FunctionComponent<Props> = ({
         groupBys={query.groupBys ?? []}
         onChange={(crossSeriesReducer) => onChange({ ...query, crossSeriesReducer })}
       ></Aggregations>
-    </InlineFields>
+    </Row>
   );
 };

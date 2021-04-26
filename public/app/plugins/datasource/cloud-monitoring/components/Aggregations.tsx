@@ -3,9 +3,10 @@ import _ from 'lodash';
 
 import { SelectableValue } from '@grafana/data';
 import { Select } from '@grafana/ui';
-import { InlineFields } from '.';
+import { Field } from '.';
 import { getAggregationOptionsByMetric } from '../functions';
 import { MetricDescriptor, ValueTypes, MetricKind } from '../types';
+import { SELECT_WIDTH } from '../constants';
 
 export interface Props {
   onChange: (metricDescriptor: string) => void;
@@ -20,8 +21,9 @@ export const Aggregations: FC<Props> = (props) => {
   const selected = useSelectedFromOptions(aggOptions, props);
 
   return (
-    <InlineFields label="Function" data-testid="aggregations">
+    <Field label="Group by function" data-testid="aggregations">
       <Select
+        width={SELECT_WIDTH}
         onChange={({ value }) => props.onChange(value!)}
         value={selected}
         options={[
@@ -37,7 +39,7 @@ export const Aggregations: FC<Props> = (props) => {
         ]}
         placeholder="Select Reducer"
       />
-    </InlineFields>
+    </Field>
   );
 };
 

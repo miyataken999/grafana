@@ -6,7 +6,7 @@ import { Button, HorizontalGroup, Select, VerticalGroup } from '@grafana/ui';
 import { labelsToGroupedOptions, stringArrayToFilters, toOption } from '../functions';
 import { Filter } from '../types';
 import { LABEL_WIDTH, SELECT_WIDTH } from '../constants';
-import { InlineFields } from '.';
+import { Row } from '.';
 
 export interface Props {
   labels: { [key: string]: string[] };
@@ -64,9 +64,8 @@ export const LabelFilter: FunctionComponent<Props> = ({
   };
 
   return (
-    <InlineFields
+    <Row
       label="Filter"
-      transparent
       labelWidth={LABEL_WIDTH}
       tooltip={
         'To reduce the amount of data charted, apply a filter. A filter has three components: a label, a comparison, and a value. The comparison can be an equality, inequality, or regular expression.'
@@ -74,7 +73,6 @@ export const LabelFilter: FunctionComponent<Props> = ({
     >
       <VerticalGroup spacing="xs" width="auto">
         {filters.map(({ key, operator, value, condition }, index) => (
-          // <HorizontalGroup key={index} spacing="xs">
           <HorizontalGroup key={index} spacing="xs" width="auto">
             <Select
               width={SELECT_WIDTH}
@@ -122,12 +120,8 @@ export const LabelFilter: FunctionComponent<Props> = ({
             {index + 1 === filters.length && Object.values(filters).every(({ value }) => value) && <AddFilter />}
           </HorizontalGroup>
         ))}
-        {!filters.length && (
-          // <HorizontalGroup>
-          <AddFilter />
-          // </HorizontalGroup>
-        )}
+        {!filters.length && <AddFilter />}
       </VerticalGroup>
-    </InlineFields>
+    </Row>
   );
 };

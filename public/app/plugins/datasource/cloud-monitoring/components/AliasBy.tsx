@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { debounce } from 'lodash';
 import { Input } from '@grafana/ui';
-import { InlineFields } from '.';
+import { Row } from '.';
 import { INPUT_WIDTH, LABEL_WIDTH } from '../constants';
 
 export interface Props {
@@ -20,8 +20,8 @@ export const AliasBy: FunctionComponent<Props> = ({ value = '', onChange }) => {
   };
 
   return (
-    <InlineFields label="Alias by" grow transparent labelWidth={LABEL_WIDTH}>
+    <Row label="Alias by" labelWidth={LABEL_WIDTH}>
       <Input width={INPUT_WIDTH} value={alias} onChange={onChange} />
-    </InlineFields>
+    </Row>
   );
 };

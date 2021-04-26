@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Select } from '@grafana/ui';
 import { SelectableValue } from '@grafana/data';
-import { InlineFields } from '..';
+import { Row } from '..';
 import CloudMonitoringDatasource from '../../datasource';
 import { SLOQuery } from '../../types';
 import { LABEL_WIDTH, SELECT_WIDTH } from '../../constants';
@@ -34,7 +34,7 @@ export const SLO: React.FC<Props> = ({ query, templateVariableOptions, onChange,
   }, [datasource, projectName, serviceId, templateVariableOptions]);
 
   return (
-    <InlineFields label="SLO" grow transparent labelWidth={LABEL_WIDTH}>
+    <Row label="SLO" labelWidth={LABEL_WIDTH}>
       <Select
         width={SELECT_WIDTH}
         allowCustomValue
@@ -47,6 +47,6 @@ export const SLO: React.FC<Props> = ({ query, templateVariableOptions, onChange,
           onChange({ ...query, sloId, sloName, goal: slo?.goal });
         }}
       />
-    </InlineFields>
+    </Row>
   );
 };

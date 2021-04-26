@@ -1,70 +1,33 @@
 import React, { FC } from 'react';
-import { GrafanaTheme } from '@grafana/data';
-import { useTheme, InlineLabel, PopoverContent } from '@grafana/ui';
-import { css, cx } from '@emotion/css';
+import { PopoverContent } from '@grafana/ui';
 
 export interface Props {
   children: React.ReactNode;
   tooltip?: PopoverContent;
-  /** Custom width for the label */
-  labelWidth?: number | 'auto';
-  /** Make the field's child to fill the width of the row. Equivalent to setting `flex-grow:1` on the field */
-  grow?: boolean;
-  /** Make field's background transparent */
-  transparent?: boolean;
   label?: React.ReactNode;
   className?: string;
+  noFillEnd?: boolean;
+  labelWidth?: number;
 }
 
-export const InlineFields: FC<Props> = ({
-  children,
-  label,
-  tooltip,
-  labelWidth = 'auto',
-  className,
-  grow,
-  transparent,
-  ...htmlProps
-}) => {
-  const theme = useTheme();
-  const styles = getStyles(theme, grow);
-
-  // const labelElement =
-  //   typeof label === 'string' ? (
-  //     <InlineLabel width={labelWidth} tooltip={tooltip} className="gf-form-label query-keyword">
-  //       {label}
-  //     </InlineLabel>
-  //   ) : (
-  //     label
-  //   );
-
+export const Row: FC<Props> = ({ children, label, tooltip, className, labelWidth, noFillEnd, ...htmlProps }) => {
   return (
-    <div className={cx(styles.container, className, 'gf-form')} {...htmlProps}>
-      {/* {labelElement} */}
-      <label className={`gf-form-label query-keyword width-9 ${className}`}>{label}</label>
+    <div className="gf-form">
+      {label && <label className={`gf-form-label query-keyword ${className} width-8`}>{label}</label>}
       {children}
-      <div className={'gf-form--grow'}>
-        <div className={'gf-form-label gf-form-label--grow'}></div>
-      </div>
+
+      <div className={'gf-form--grow'}>{noFillEnd || <div className={'gf-form-label gf-form-label--grow'}></div>}</div>
     </div>
   );
 };
 
-InlineFields.displayName = 'InlineFields';
-
-const getStyles = (theme: GrafanaTheme, grow?: boolean) => {
-  return {
-    container: css`
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      text-align: left;
-      position: relative;
-      flex: ${grow ? 1 : 0} 0 auto;
-      margin: 0 0 ${theme.spacing.xs} 0;
-      > * {
-        margin-bottom: 0 !important;
-      }
-    `,
-  };
+export const Field: FC<Props> = ({ children, label, tooltip, className, labelWidth, noFillEnd, ...htmlProps }) => {
+  return (
+    <>
+      {label && <label className={`gf-form-label query-keyword ${className} width-7`}>{label}</label>}
+      {children}
+    </>
+  );
 };
+
+Row.displayName = 'InlineFields';

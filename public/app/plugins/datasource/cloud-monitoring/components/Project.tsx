@@ -3,7 +3,7 @@ import { SelectableValue } from '@grafana/data';
 import { Select } from '@grafana/ui';
 import CloudMonitoringDatasource from '../datasource';
 import { LABEL_WIDTH, SELECT_WIDTH } from '../constants';
-import { InlineFields } from '.';
+import { Row } from '.';
 
 export interface Props {
   datasource: CloudMonitoringDatasource;
@@ -27,7 +27,7 @@ export function Project({ projectName, datasource, onChange, templateVariableOpt
   }, [datasource, templateVariableOptions]);
 
   return (
-    <InlineFields label="Project" transparent labelWidth={LABEL_WIDTH}>
+    <Row label="Project" labelWidth={LABEL_WIDTH}>
       <Select
         width={SELECT_WIDTH}
         allowCustomValue
@@ -37,6 +37,6 @@ export function Project({ projectName, datasource, onChange, templateVariableOpt
         value={{ value: projectName, label: projectName }}
         placeholder="Select Project"
       />
-    </InlineFields>
+    </Row>
   );
 }
