@@ -72,9 +72,10 @@ export const LabelFilter: FunctionComponent<Props> = ({
         'To reduce the amount of data charted, apply a filter. A filter has three components: a label, a comparison, and a value. The comparison can be an equality, inequality, or regular expression.'
       }
     >
-      <VerticalGroup spacing="xs">
+      <VerticalGroup spacing="xs" width="auto">
         {filters.map(({ key, operator, value, condition }, index) => (
-          <HorizontalGroup key={index} spacing="xs">
+          // <HorizontalGroup key={index} spacing="xs">
+          <HorizontalGroup key={index} spacing="xs" width="auto">
             <Select
               width={SELECT_WIDTH}
               allowCustomValue
@@ -122,9 +123,9 @@ export const LabelFilter: FunctionComponent<Props> = ({
           </HorizontalGroup>
         ))}
         {!filters.length && (
-          <HorizontalGroup>
-            <AddFilter />
-          </HorizontalGroup>
+          // <HorizontalGroup>
+          <AddFilter />
+          // </HorizontalGroup>
         )}
       </VerticalGroup>
     </InlineFields>

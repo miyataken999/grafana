@@ -29,19 +29,23 @@ export const InlineFields: FC<Props> = ({
   const theme = useTheme();
   const styles = getStyles(theme, grow);
 
-  const labelElement =
-    typeof label === 'string' ? (
-      <InlineLabel width={labelWidth} tooltip={tooltip} transparent={transparent}>
-        {label}
-      </InlineLabel>
-    ) : (
-      label
-    );
+  // const labelElement =
+  //   typeof label === 'string' ? (
+  //     <InlineLabel width={labelWidth} tooltip={tooltip} className="gf-form-label query-keyword">
+  //       {label}
+  //     </InlineLabel>
+  //   ) : (
+  //     label
+  //   );
 
   return (
-    <div className={cx(styles.container, className)} {...htmlProps}>
-      {labelElement}
+    <div className={cx(styles.container, className, 'gf-form')} {...htmlProps}>
+      {/* {labelElement} */}
+      <label className={`gf-form-label query-keyword width-9 ${className}`}>{label}</label>
       {children}
+      <div className={'gf-form--grow'}>
+        <div className={'gf-form-label gf-form-label--grow'}></div>
+      </div>
     </div>
   );
 };
