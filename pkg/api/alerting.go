@@ -11,6 +11,7 @@ import (
 	"github.com/grafana/grafana/pkg/models"
 	"github.com/grafana/grafana/pkg/services/alerting"
 	"github.com/grafana/grafana/pkg/services/guardian"
+	"github.com/grafana/grafana/pkg/services/ngalert/notifier"
 	"github.com/grafana/grafana/pkg/services/search"
 	"github.com/grafana/grafana/pkg/util"
 )
@@ -179,8 +180,13 @@ func GetAlert(c *models.ReqContext) response.Response {
 	return response.JSON(200, &query.Result)
 }
 
-func GetAlertNotifiers(c *models.ReqContext) response.Response {
-	return response.JSON(200, alerting.GetNotifiers())
+func GetAlertNotifiers(ngalertEnabled bool) func(*models.ReqContext) response.Response {
+	return func(_ *models.ReqContext) response.Response {
+		if ngalertEnabled {
+			return response.JSON(200, notifier.GetAvailableNotifiers())
+		}
+		return response.JSON(200, alerting.GetNotifiers())
+	}
 }
 
 func GetAlertNotificationLookup(c *models.ReqContext) response.Response {
