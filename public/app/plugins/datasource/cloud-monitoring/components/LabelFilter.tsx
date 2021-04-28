@@ -63,6 +63,8 @@ export const LabelFilter: FunctionComponent<Props> = ({
     );
   };
 
+  console.log({ filters });
+
   return (
     <Row
       label="Filter"
@@ -70,6 +72,7 @@ export const LabelFilter: FunctionComponent<Props> = ({
       tooltip={
         'To reduce the amount of data charted, apply a filter. A filter has three components: a label, a comparison, and a value. The comparison can be an equality, inequality, or regular expression.'
       }
+      noFillEnd={filters.length > 1}
     >
       <VerticalGroup spacing="xs" width="auto">
         {filters.map(({ key, operator, value, condition }, index) => (

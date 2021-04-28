@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import { PopoverContent } from '@grafana/ui';
+import { InlineLabel, PopoverContent } from '@grafana/ui';
+import { css, cx } from '@emotion/css';
 
 export interface Props {
   children: React.ReactNode;
@@ -8,15 +9,40 @@ export interface Props {
   className?: string;
   noFillEnd?: boolean;
   labelWidth?: number;
+  fillComponent?: React.ReactNode;
 }
 
-export const Row: FC<Props> = ({ children, label, tooltip, className, labelWidth, noFillEnd, ...htmlProps }) => {
+export const Row: FC<Props> = ({
+  children,
+  label,
+  tooltip,
+  className,
+  labelWidth,
+  noFillEnd,
+  fillComponent,
+  ...htmlProps
+}) => {
   return (
     <div className="gf-form">
-      {label && <label className={`gf-form-label query-keyword ${className} width-8`}>{label}</label>}
+      {label && (
+        <InlineLabel
+          width={18}
+          tooltip={tooltip}
+          className={cx(
+            'query-keyword',
+            css`
+              color: unset;
+            `
+          )}
+        >
+          {label}
+        </InlineLabel>
+      )}
       {children}
 
-      <div className={'gf-form--grow'}>{noFillEnd || <div className={'gf-form-label gf-form-label--grow'}></div>}</div>
+      <div className={'gf-form--grow'}>
+        {noFillEnd || <div className={'gf-form-label gf-form-label--grow'}>{fillComponent}</div>}
+      </div>
     </div>
   );
 };
@@ -24,7 +50,20 @@ export const Row: FC<Props> = ({ children, label, tooltip, className, labelWidth
 export const Field: FC<Props> = ({ children, label, tooltip, className, labelWidth, noFillEnd, ...htmlProps }) => {
   return (
     <>
-      {label && <label className={`gf-form-label query-keyword ${className} width-7`}>{label}</label>}
+      {label && (
+        <InlineLabel
+          width={18}
+          tooltip={tooltip}
+          className={cx(
+            'query-keyword',
+            css`
+              color: unset;
+            `
+          )}
+        >
+          {label}
+        </InlineLabel>
+      )}
       {children}
     </>
   );

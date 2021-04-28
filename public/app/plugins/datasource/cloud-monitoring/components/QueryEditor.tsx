@@ -53,7 +53,28 @@ export class QueryEditor extends PureComponent<Props> {
 
     return (
       <>
-        <Row label="Query type" labelWidth={LABEL_WIDTH}>
+        <Row
+          label="Query type"
+          labelWidth={LABEL_WIDTH}
+          fillComponent={
+            query.queryType !== QueryType.SLO && (
+              <Button
+                className={css`
+                  margin-left: auto;
+                `}
+                icon="edit"
+                onClick={() =>
+                  this.onQueryChange('metricQuery', {
+                    ...metricQuery,
+                    editorMode: metricQuery.editorMode === EditorMode.MQL ? EditorMode.Visual : EditorMode.MQL,
+                  })
+                }
+              >
+                {metricQuery.editorMode === EditorMode.MQL ? 'Switch to builder' : 'Edit MQL'}
+              </Button>
+            )
+          }
+        >
           <Select
             width={SELECT_WIDTH}
             value={queryType}
@@ -63,23 +84,6 @@ export class QueryEditor extends PureComponent<Props> {
               onRunQuery();
             }}
           />
-
-          {query.queryType !== QueryType.SLO && (
-            <Button
-              className={css`
-                margin-left: auto;
-              `}
-              icon="edit"
-              onClick={() =>
-                this.onQueryChange('metricQuery', {
-                  ...metricQuery,
-                  editorMode: metricQuery.editorMode === EditorMode.MQL ? EditorMode.Visual : EditorMode.MQL,
-                })
-              }
-            >
-              {metricQuery.editorMode === EditorMode.MQL ? 'Switch to builder' : 'Edit MQL'}
-            </Button>
-          )}
         </Row>
 
         {queryType === QueryType.METRICS && (

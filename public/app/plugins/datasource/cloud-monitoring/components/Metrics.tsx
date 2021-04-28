@@ -120,7 +120,7 @@ export function Metrics(props: Props) {
   return (
     <>
       <Row>
-        <Field label="Service" className="width-8" labelWidth={LABEL_WIDTH} noFillEnd>
+        <Field label="Service" className="width-9" labelWidth={LABEL_WIDTH} noFillEnd>
           <Select
             width={SELECT_WIDTH}
             onChange={onServiceChange}

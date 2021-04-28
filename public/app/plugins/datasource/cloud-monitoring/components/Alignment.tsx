@@ -20,6 +20,7 @@ export const Alignment: FC<Props> = ({ templateVariableOptions, onChange, query,
       label="Alignment function"
       labelWidth={LABEL_WIDTH}
       tooltip="The process of alignment consists of collecting all data points received in a fixed length of time, applying a function to combine those data points, and assigning a timestamp to the result."
+      fillComponent={<AlignmentPeriodLabel datasource={datasource} customMetaData={customMetaData} />}
     >
       <AlignmentFunction templateVariableOptions={templateVariableOptions} query={query} onChange={onChange} />
       <Field label="Alignment period">
@@ -30,7 +31,6 @@ export const Alignment: FC<Props> = ({ templateVariableOptions, onChange, query,
           onChange={onChange}
         />
       </Field>
-      <AlignmentPeriodLabel datasource={datasource} customMetaData={customMetaData} />
     </Row>
   );
 };

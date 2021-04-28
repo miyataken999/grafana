@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { SelectableValue } from '@grafana/data';
-import { InlineField, MultiSelect } from '@grafana/ui';
+import { MultiSelect } from '@grafana/ui';
 import { labelsToGroupedOptions } from '../functions';
 import { SYSTEM_LABELS, LABEL_WIDTH, INPUT_WIDTH } from '../constants';
 import { MetricDescriptor, MetricQuery } from '../types';
