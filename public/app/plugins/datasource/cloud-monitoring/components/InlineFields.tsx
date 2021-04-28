@@ -25,18 +25,11 @@ export const Row: FC<Props> = ({
   return (
     <div className="gf-form">
       {label && (
-        <InlineLabel
-          width={18}
-          tooltip={tooltip}
-          className={css`
-            color: #33a2e5;
-          `}
-        >
+        <InlineLabel width={18} tooltip={tooltip}>
           {label}
         </InlineLabel>
       )}
-      {children}
-
+      <div className={css``}>{children}</div>
       <div className={'gf-form--grow'}>
         {noFillEnd || <div className={'gf-form-label gf-form-label--grow'}>{fillComponent}</div>}
       </div>
@@ -48,13 +41,7 @@ export const Field: FC<Props> = ({ children, label, tooltip, className, labelWid
   return (
     <>
       {label && (
-        <InlineLabel
-          width={18}
-          tooltip={tooltip}
-          className={css`
-            color: #33a2e5;
-          `}
-        >
+        <InlineLabel width={18} tooltip={tooltip}>
           {label}
         </InlineLabel>
       )}
