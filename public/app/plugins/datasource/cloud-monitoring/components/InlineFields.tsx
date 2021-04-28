@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { InlineLabel, PopoverContent } from '@grafana/ui';
-import { css, cx } from '@emotion/css';
+import { css } from '@emotion/css';
 
 export interface Props {
   children: React.ReactNode;
@@ -28,12 +28,9 @@ export const Row: FC<Props> = ({
         <InlineLabel
           width={18}
           tooltip={tooltip}
-          className={cx(
-            'query-keyword',
-            css`
-              color: unset;
-            `
-          )}
+          className={css`
+            color: #33a2e5;
+          `}
         >
           {label}
         </InlineLabel>
@@ -54,12 +51,9 @@ export const Field: FC<Props> = ({ children, label, tooltip, className, labelWid
         <InlineLabel
           width={18}
           tooltip={tooltip}
-          className={cx(
-            'query-keyword',
-            css`
-              color: unset;
-            `
-          )}
+          className={css`
+            color: #33a2e5;
+          `}
         >
           {label}
         </InlineLabel>

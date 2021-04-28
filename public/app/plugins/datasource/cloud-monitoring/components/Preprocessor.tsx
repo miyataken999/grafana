@@ -5,6 +5,7 @@ import { MetricDescriptor, MetricKind, MetricQuery, PreprocessorType } from '../
 import { LABEL_WIDTH } from '../constants';
 import { getAlignmentPickerData } from '../functions';
 import { Row } from '.';
+import { css } from '@emotion/css';
 
 const NONE_OPTION = { label: 'None', value: PreprocessorType.None };
 
@@ -23,6 +24,9 @@ export const Preprocessor: FunctionComponent<Props> = ({ query, metricDescriptor
       tooltip="Preprocessing options are displayed when the selected metric has a metric kind of delta or cumulative. The specific options available are determined by the metic's value type. If you select 'Rate', data points are aligned and converted to a rate per time series. If you select 'Delta', data points are aligned by their delta (difference) per time series"
     >
       <RadioButtonGroup
+        className={css`
+          margin-right: 4px;
+        `}
         onChange={(value: PreprocessorType) => {
           const { valueType, metricKind, perSeriesAligner: psa } = query;
           const { perSeriesAligner } = getAlignmentPickerData(valueType, metricKind, psa, value);
