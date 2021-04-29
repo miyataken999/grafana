@@ -59,6 +59,7 @@ export class QueryEditor extends PureComponent<Props> {
           fillComponent={
             query.queryType !== QueryType.SLO && (
               <Button
+                variant="secondary"
                 className={css`
                   margin-left: auto;
                 `}

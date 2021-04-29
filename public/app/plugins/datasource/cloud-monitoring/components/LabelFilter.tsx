@@ -7,7 +7,6 @@ import { labelsToGroupedOptions, stringArrayToFilters, toOption } from '../funct
 import { Filter } from '../types';
 import { LABEL_WIDTH, SELECT_WIDTH } from '../constants';
 import { Row } from '.';
-import { css } from '@emotion/css';
 
 export interface Props {
   labels: { [key: string]: string[] };
@@ -46,16 +45,12 @@ export const LabelFilter: FunctionComponent<Props> = ({
 
   const filtersToStringArray = useCallback((filters: Filter[]) => {
     const strArr = flatten(filters.map(({ key, operator, value, condition }) => [key, operator, value, condition!]));
-    // return strArr.filter((_, i) => i !== strArr.length - 1);
     return strArr.slice(0, strArr.length - 1);
   }, []);
 
   const AddFilter = () => {
     return (
       <Select
-        className={css`
-          margin-right: 4px;
-        `}
         allowCustomValue
         options={[variableOptionGroup, ...labelsToGroupedOptions(Object.keys(labels))]}
         onChange={({ value: key = '' }) =>

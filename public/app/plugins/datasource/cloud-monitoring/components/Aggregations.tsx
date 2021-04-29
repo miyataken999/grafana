@@ -6,7 +6,7 @@ import { Select } from '@grafana/ui';
 import { Field } from '.';
 import { getAggregationOptionsByMetric } from '../functions';
 import { MetricDescriptor, ValueTypes, MetricKind } from '../types';
-import { SELECT_WIDTH } from '../constants';
+import { INNER_LABEL_WIDTH } from '../constants';
 
 export interface Props {
   onChange: (metricDescriptor: string) => void;
@@ -23,7 +23,7 @@ export const Aggregations: FC<Props> = (props) => {
   return (
     <Field label="Group by function" data-testid="aggregations">
       <Select
-        width={SELECT_WIDTH}
+        width={INNER_LABEL_WIDTH}
         onChange={({ value }) => props.onChange(value!)}
         value={selected}
         options={[

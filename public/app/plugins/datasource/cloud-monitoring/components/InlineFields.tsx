@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
-import { InlineLabel, PopoverContent } from '@grafana/ui';
+import { HorizontalGroup, InlineLabel, PopoverContent } from '@grafana/ui';
 import { css } from '@emotion/css';
+import { INNER_LABEL_WIDTH, LABEL_WIDTH } from '../constants';
 
 export interface Props {
   children: React.ReactNode;
@@ -17,19 +18,27 @@ export const Row: FC<Props> = ({
   label,
   tooltip,
   className,
-  labelWidth,
   noFillEnd,
   fillComponent,
+  labelWidth = LABEL_WIDTH,
   ...htmlProps
 }) => {
   return (
     <div className="gf-form">
       {label && (
-        <InlineLabel width={18} tooltip={tooltip}>
+        <InlineLabel width={labelWidth} tooltip={tooltip}>
           {label}
         </InlineLabel>
       )}
-      <div className={css``}>{children}</div>
+      <div
+        className={css`
+          margin-right: 4px;
+        `}
+      >
+        <HorizontalGroup spacing="xs" width="auto">
+          {children}
+        </HorizontalGroup>
+      </div>
       <div className={'gf-form--grow'}>
         {noFillEnd || <div className={'gf-form-label gf-form-label--grow'}>{fillComponent}</div>}
       </div>
@@ -37,11 +46,11 @@ export const Row: FC<Props> = ({
   );
 };
 
-export const Field: FC<Props> = ({ children, label, tooltip, className, labelWidth, noFillEnd, ...htmlProps }) => {
+export const Field: FC<Props> = ({ children, label, tooltip, labelWidth = INNER_LABEL_WIDTH }) => {
   return (
     <>
       {label && (
-        <InlineLabel width={18} tooltip={tooltip}>
+        <InlineLabel width={labelWidth} tooltip={tooltip}>
           {label}
         </InlineLabel>
       )}
